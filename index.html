@@ -590,6 +590,52 @@ function showSparkles() {
 
 </script>
 
+<style>
+/* Efek neon GOLDEN SPIN DEMO */
+#r1, #r2, #r3 {
+  transition: box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+
+#r1.neon-stop,
+#r2.neon-stop,
+#r3.neon-stop {
+  border-color: #ffe45c !important;
+  box-shadow:
+    0 0 8px #ffe45c,
+    0 0 18px #ffb700,
+    0 0 32px rgba(255, 183, 0, 0.7);
+}
+</style>
+
+<script>
+(function () {
+  const reels = document.querySelectorAll("#r1, #r2, #r3");
+
+  if (typeof window.finish !== "function") return;
+
+  const originalFinish = window.finish;
+
+  window.finish = function () {
+    const result = originalFinish.apply(this, arguments);
+
+    reels.forEach(function (reel) {
+      reel.classList.remove("neon-stop");
+      void reel.offsetWidth;
+      reel.classList.add("neon-stop");
+    });
+
+    setTimeout(function () {
+      reels.forEach(function (reel) {
+        reel.classList.remove("neon-stop");
+      });
+    }, 1300);
+
+    return result;
+  };
+})();
+</script>
+
 </body>
 </html>
 
