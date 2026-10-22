@@ -2,141 +2,317 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#170e29">
 <title>GOLDEN SPIN DEMO</title>
+
 <style>
+:root {
+  --gold: #f7d578;
+  --purple: #9a67ff;
+  --bg: #10091c;
+  --panel: #211535;
+}
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  background: #101020;
-  color: white;
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  padding: 22px 14px;
+  color: #fff;
+  font-family: system-ui, Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at top, #382052 0, transparent 55%),
+    var(--bg);
+}
+.container {
+  max-width: 440px;
+  margin: auto;
+}
+header {
   text-align: center;
-  padding: 20px;
+  padding: 18px 0 22px;
 }
-.game {
-  max-width: 380px;
-  margin: 25px auto;
-  padding: 24px 15px;
-  border: 2px solid #f6c344;
-  border-radius: 20px;
-  background: #20203b;
+.logo {
+  font-size: clamp(27px, 8vw, 38px);
+  font-weight: 1000;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-shadow: 0 0 24px #c68b3c77;
 }
-h1 { color: #ffd65a; }
-.slots {
+.subtitle {
+  color: #d5bdfc;
+  letter-spacing: 4px;
+  font-size: 11px;
+  margin-top: 5px;
+}
+.card {
+  padding: 22px 16px;
+  border: 1px solid #9973cf77;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #2c1c43, #180f28);
+  box-shadow: 0 15px 45px #0005, 0 0 25px #8d56e51c;
+}
+.label {
+  text-align: center;
+  color: #d6c5f4;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.balance {
+  margin: 8px 0 20px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--gold);
+}
+.reels {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin: 25px 0;
+  gap: 9px;
+  padding: 15px 8px;
+  border: 2px solid #d2a84f;
+  border-radius: 18px;
+  background: #120c1c;
+  box-shadow: inset 0 0 20px #9c70e326;
 }
-.slot {
-  background: white;
-  color: #17172b;
-  font-size: 48px;
-  width: 78px;
-  height: 85px;
+.reel {
+  flex: 1;
+  max-width: 100px;
+  height: 90px;
   display: grid;
   place-items: center;
+  font-size: 49px;
   border-radius: 12px;
+  color: #21132f;
+  background: linear-gradient(150deg, #fff5d7, #e8d4a1);
+  box-shadow: inset 0 -5px 0 #b89a5a;
+}
+.reel.spinning {
+  animation: pulse .12s infinite alternate;
+}
+@keyframes pulse {
+  from { transform: translateY(-2px); }
+  to { transform: translateY(2px); }
+}
+.result {
+  text-align: center;
+  min-height: 48px;
+  padding: 16px 0 4px;
+  color: #e5d7ff;
+  font-size: 14px;
 }
 button {
-  background: #ffd34d;
-  color: #191919;
-  border: none;
-  padding: 14px 30px;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: bold;
+  width: 100%;
+  border: 0;
+  border-radius: 13px;
+  padding: 14px 12px;
+  font-size: 15px;
+  font-weight: 850;
+  cursor: pointer;
+  touch-action: manipulation;
 }
-button:disabled { opacity: .6; }
-#message { min-height: 25px; }
+button:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+.spin {
+  margin-top: 10px;
+  color: #271631;
+  background: linear-gradient(100deg, #e5b84d, #fff0ad, #d6a43b);
+  box-shadow: 0 5px 0 #89602a, 0 0 20px #e8b84b22;
+}
+.secondary {
+  margin-top: 12px;
+  color: #e6d7ff;
+  border: 1px solid #8e68be;
+  background: #38254e;
+}
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 15px;
+}
+.info > div {
+  padding: 13px 8px;
+  text-align: center;
+  border-radius: 12px;
+  background: #ffffff08;
+  border: 1px solid #ffffff14;
+}
+.info strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--gold);
+  font-size: 19px;
+}
+.info small { color: #c9b9df; }
+.rules {
+  margin-top: 18px;
+  color: #c6b6d8;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.7;
+}
+footer {
+  text-align: center;
+  color: #87759d;
+  font-size: 11px;
+  margin: 22px 0 8px;
+}
 </style>
 </head>
+
 <body>
-<div class="game">
-  <h1>GOLDEN SPIN DEMO</h1>
-  <p>GAME DEMO • KREDIT VIRTUAL</p>
-  <h3>Kredit: <span id="credit">1000</span></h3>
+<main class="container">
+  <header>
+    <div class="logo">✦ GOLDEN SPIN ✦</div>
+    <div class="subtitle">PREMIUM ARCADE DEMO</div>
+  </header>
 
-  <div class="slots">
-    <div class="slot" id="s1">🍒</div>
-    <div class="slot" id="s2">🍋</div>
-    <div class="slot" id="s3">🍇</div>
-  </div>
+  <section class="card">
+    <div class="label">SALDO KREDIT VIRTUAL</div>
+    <div class="balance" id="balance">1.000 PTS</div>
 
-  <button id="spin" onclick="spin()">SPIN</button>
-  <p id="message">Tekan SPIN untuk bermain!</p>
-  <button onclick="resetGame()"
-    style="background:#8b8bff">
-    RESET KREDIT
-  </button>
-</div>
+    <div class="reels" aria-label="Simbol permainan">
+      <div class="reel" id="r1">🍒</div>
+      <div class="reel" id="r2">⭐</div>
+      <div class="reel" id="r3">🍇</div>
+    </div>
+
+    <div class="result" id="result" aria-live="polite">
+      Selamat datang! Mainkan demo gratis.
+    </div>
+
+    <button class="spin" id="spin" onclick="spin()">
+      ✨ PUTAR DEMO ✨
+    </button>
+    <button class="secondary" onclick="resetGame()">
+      ↻ RESET KREDIT
+    </button>
+
+    <div class="info">
+      <div>
+        <small>Total putaran</small>
+        <strong id="rounds">0</strong>
+      </div>
+      <div>
+        <small>Simbol cocok</small>
+        <strong id="matches">0</strong>
+      </div>
+    </div>
+
+    <div class="rules">
+      Cocokkan simbol untuk mendapatkan poin virtual.<br>
+      Tiga simbol sama: +100 poin.<br>
+      Dua simbol sama: +20 poin.
+    </div>
+  </section>
+
+  <footer>
+    GOLDEN SPIN DEMO · HANYA UNTUK HIBURAN<br>
+    Kredit virtual tidak memiliki nilai uang dan tidak dapat diuangkan.
+  </footer>
+</main>
 
 <script>
-let credit = 1000;
+const symbols = ["🍒", "🍋", "🍇", "🍉", "⭐", "🔔"];
+
+let credits = 1000;
+let rounds = 0;
+let matches = 0;
 let busy = false;
-const symbols = ["🍒","🍋","🍇","🍉","⭐","🔔"];
+
+const $ = id => document.getElementById(id);
+
+function update() {
+  $("balance").textContent =
+    credits.toLocaleString("id-ID") + " PTS";
+  $("rounds").textContent = rounds;
+  $("matches").textContent = matches;
+}
+
+function randomSymbol() {
+  return symbols[Math.floor(Math.random() * symbols.length)];
+}
 
 function spin() {
-  if (busy || credit < 10) {
-    document.getElementById("message").textContent =
-      "Kredit habis! Tekan reset untuk demo ulang.";
-    return;
-  }
+  if (busy) return;
 
   busy = true;
-  credit -= 10;
-  updateCredit();
+  $("spin").disabled = true;
 
-  document.getElementById("spin").disabled = true;
-  document.getElementById("message").textContent =
-    "Gulungan berputar...";
+  // Kredit hanya skor demo, bukan taruhan uang.
+  rounds++;
+  const result = [randomSymbol(), randomSymbol(), randomSymbol()];
 
-  let count = 0;
+  ["r1", "r2", "r3"].forEach((id, i) => {
+    $(id).classList.add("spinning");
+  });
+
+  $("result").textContent = "✨ Mengacak simbol...";
+
+  let ticks = 0;
   const timer = setInterval(() => {
-    for (let i = 1; i <= 3; i++) {
-      document.getElementById("s" + i).textContent =
-        symbols[Math.floor(Math.random() * symbols.length)];
-    }
-    count++;
+    ["r1", "r2", "r3"].forEach(id => {
+      $(id).textContent = randomSymbol();
+    });
 
-    if (count >= 10) {
+    ticks++;
+
+    if (ticks >= 12) {
       clearInterval(timer);
-      finishSpin();
+
+      result.forEach((symbol, i) => {
+        $("r" + (i + 1)).textContent = symbol;
+        $("r" + (i + 1)).classList.remove("spinning");
+      });
+
+      finish(result);
     }
   }, 100);
 }
 
-function finishSpin() {
-  const a = document.getElementById("s1").textContent;
-  const b = document.getElementById("s2").textContent;
-  const c = document.getElementById("s3").textContent;
-  let message = "Belum cocok, coba lagi!";
+function finish(result) {
+  const [a, b, c] = result;
+  let message = "Belum cocok. Coba lagi!";
+  const unique = new Set(result).size;
 
-  if (a === b && b === c) {
-    credit += 100;
-    message = "🎉 JACKPOT DEMO! +100 kredit";
-  } else if (a === b || b === c || a === c) {
-    credit += 20;
-    message = "✨ Dua simbol cocok! +20 kredit";
+  if (unique === 1) {
+    credits += 100;
+    matches++;
+    message = "👑 JACKPOT DEMO! +100 poin";
+  } else if (unique === 2) {
+    credits += 20;
+    matches++;
+    message = "✨ Simbol cocok! +20 poin";
   }
 
-  updateCredit();
-  document.getElementById("message").textContent = message;
-  document.getElementById("spin").disabled = false;
-  busy = false;
-}
+  credits = Math.min(credits, 999999999);
+  update();
 
-function updateCredit() {
-  document.getElementById("credit").textContent = credit;
+  $("result").textContent = message;
+  busy = false;
+  $("spin").disabled = false;
 }
 
 function resetGame() {
   if (busy) return;
-  credit = 1000;
-  updateCredit();
-  document.getElementById("message").textContent =
-    "Kredit demo berhasil direset!";
+
+  credits = 1000;
+  rounds = 0;
+  matches = 0;
+
+  ["r1", "r2", "r3"].forEach(id => {
+    $(id).textContent = "✨";
+  });
+
+  $("result").textContent = "Kredit demo sudah direset!";
+  update();
 }
 </script>
 </body>
 </html>
+
