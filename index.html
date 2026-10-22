@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gavril Slot Demo</title>
+<style>
+body {
+  margin: 0;
+  background: #101020;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+.game {
+  max-width: 380px;
+  margin: 25px auto;
+  padding: 24px 15px;
+  border: 2px solid #f6c344;
+  border-radius: 20px;
+  background: #20203b;
+}
+h1 { color: #ffd65a; }
+.slots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px 0;
+}
+.slot {
+  background: white;
+  color: #17172b;
+  font-size: 48px;
+  width: 78px;
+  height: 85px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+}
+button {
+  background: #ffd34d;
+  color: #191919;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+}
+button:disabled { opacity: .6; }
+#message { min-height: 25px; }
+</style>
+</head>
+<body>
+<div class="game">
+  <h1>🎰 GAVRIL SLOT</h1>
+  <p>GAME DEMO • KREDIT VIRTUAL</p>
+  <h3>Kredit: <span id="credit">1000</span></h3>
+
+  <div class="slots">
+    <div class="slot" id="s1">🍒</div>
+    <div class="slot" id="s2">🍋</div>
+    <div class="slot" id="s3">🍇</div>
+  </div>
+
+  <button id="spin" onclick="spin()">SPIN</button>
+  <p id="message">Tekan SPIN untuk bermain!</p>
+  <button onclick="resetGame()"
+    style="background:#8b8bff">
+    RESET KREDIT
+  </button>
+</div>
+
+<script>
+let credit = 1000;
+let busy = false;
+const symbols = ["🍒","🍋","🍇","🍉","⭐","🔔"];
+
+function spin() {
+  if (busy || credit < 10) {
+    document.getElementById("message").textContent =
+      "Kredit habis! Tekan reset untuk demo ulang.";
+    return;
+  }
+
+  busy = true;
+  credit -= 10;
+  updateCredit();
+
+  document.getElementById("spin").disabled = true;
+  document.getElementById("message").textContent =
+    "Gulungan berputar...";
+
+  let count = 0;
+  const timer = setInterval(() => {
+    for (let i = 1; i <= 3; i++) {
+      document.getElementById("s" + i).textContent =
+        symbols[Math.floor(Math.random() * symbols.length)];
+    }
+    count++;
+
+    if (count >= 10) {
+      clearInterval(timer);
+      finishSpin();
+    }
+  }, 100);
+}
+
+function finishSpin() {
+  const a = document.getElementById("s1").textContent;
+  const b = document.getElementById("s2").textContent;
+  const c = document.getElementById("s3").textContent;
+  let message = "Belum cocok, coba lagi!";
+
+  if (a === b && b === c) {
+    credit += 100;
+    message = "🎉 JACKPOT DEMO! +100 kredit";
+  } else if (a === b || b === c || a === c) {
+    credit += 20;
+    message = "✨ Dua simbol cocok! +20 kredit";
+  }
+
+  updateCredit();
+  document.getElementById("message").textContent = message;
+  document.getElementById("spin").disabled = false;
+  busy = false;
+}
+
+function updateCredit() {
+  document.getElementById("credit").textContent = credit;
+}
+
+function resetGame() {
+  if (busy) return;
+  credit = 1000;
+  updateCredit();
+  document.getElementById("message").textContent =
+    "Kredit demo berhasil direset!";
+}
+</script>
+</body>
+</html>
