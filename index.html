@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -6,510 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#170e29">
 <title>GOLDEN SPIN DEMO</title>
-  
 <style>
-:root {
-  --gold: #f7d578;
-  --purple: #9a67ff;
-  --bg: #10091c;
-  --panel: #211535;
-}
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  padding: 22px 14px;
-  color: #fff;
-  font-family: system-ui, Arial, sans-serif;
-  background:
-    radial-gradient(ellipse at top, #382052 0, transparent 55%),
-    var(--bg);
-}
-.container {
-  max-width: 440px;
-  margin: auto;
-}
-header {
-  text-align: center;
-  padding: 18px 0 22px;
-}
-.logo {
-  font-size: clamp(27px, 8vw, 38px);
-  font-weight: 1000;
-  letter-spacing: 2px;
-  color: var(--gold);
-  text-shadow: 0 0 24px #c68b3c77;
-}
-.subtitle {
-  color: #d5bdfc;
-  letter-spacing: 4px;
-  font-size: 11px;
-  margin-top: 5px;
-}
-.card {
-  padding: 22px 16px;
-  border: 1px solid #9973cf77;
-  border-radius: 22px;
-  background: linear-gradient(145deg, #2c1c43, #180f28);
-  box-shadow: 0 15px 45px #0005, 0 0 25px #8d56e51c;
-}
-.label {
-  text-align: center;
-  color: #d6c5f4;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-.balance {
-  margin: 8px 0 20px;
-  text-align: center;
-  font-size: 32px;
-  font-weight: 900;
-  color: var(--gold);
-}
-.reels {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  gap: 9px;
-  padding: 15px 8px;
-  border: 2px solid #d2a84f;
-  border-radius: 18px;
-  background: #120c1c;
-  box-shadow: inset 0 0 20px #9c70e326;
-}
-.reel {
-  flex: 1;
-  max-width: 100px;
-  height: 90px;
-  display: grid;
-  place-items: center;
-  font-size: 49px;
-  border-radius: 12px;
-  color: #21132f;
-  background: linear-gradient(150deg, #fff5d7, #e8d4a1);
-  box-shadow: inset 0 -5px 0 #b89a5a;
-}
-.reel.spinning {
-  animation: pulse .12s infinite alternate;
-  
-/* Cahaya emas pada panel permainan */
-.card {
-  position: relative;
-  overflow: hidden;
-  box-shadow:
-    0 0 18px #f7d57822,
-    0 15px 45px #0005;
-}
-
-/* Kilauan bergerak pada logo */
-.logo {
-  animation: goldenGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes goldenGlow {
-  from {
-    text-shadow: 0 0 8px #f7d57855;
-  }
-  to {
-    text-shadow:
-      0 0 12px #f7d578,
-      0 0 28px #f7d578aa,
-      0 0 45px #9a67ff66;
-  }
-}
-/* Garis kilauan yang bergerak di panel */
-.card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 70%;
-  height: 100%;
-  pointer-events: none;
-  background: linear-gradient(
-    110deg,
-    transparent,
-    #fff4c433,
-    #f7d57866,
-    transparent
-  );
-  transform: skewX(-20deg);
-  animation: shineSweep 5s ease-in-out infinite;
-}
-
-@keyframes shineSweep {
-  0%, 65% {
-    left: -150%;
-  }
-  100% {
-    left: 180%;
-  }
-}
-
-/* Cahaya lembut di tombol putar */
-.spin {
-  animation: buttonGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes buttonGlow {
-  from {
-    box-shadow: 0 5px 0 #89602a, 0 0 8px #e8b84b22;
-  }
-  to {
-    box-shadow:
-      0 5px 0 #89602a,
-      0 0 22px #f7d57899;
-  }
-}
-
-
-/* Cahaya pada kotak simbol saat berputar */
-.reel.spinning {
-  box-shadow:
-    0 0 12px #f7d578,
-    0 0 25px #f7d57899,
-    inset 0 -5px 0 #b89a5a;
-}
-
-}
-@keyframes pulse {
-  from { transform: translateY(-2px); }
-  to { transform: translateY(2px); }
-}
-.result {
-  text-align: center;
-  min-height: 48px;
-  padding: 16px 0 4px;
-  color: #e5d7ff;
-  font-size: 14px;
-}
-button {
-  width: 100%;
-  border: 0;
-  border-radius: 13px;
-  padding: 14px 12px;
-  font-size: 15px;
-  font-weight: 850;
-  cursor: pointer;
-  touch-action: manipulation;
-}
-button:disabled {
-  opacity: .55;
-  cursor: wait;
-}
-.spin {
-  margin-top: 10px;
-  color: #271631;
-  background: linear-gradient(100deg, #e5b84d, #fff0ad, #d6a43b);
-  box-shadow: 0 5px 0 #89602a, 0 0 20px #e8b84b22;
-}
-.secondary {
-  margin-top: 12px;
-  color: #e6d7ff;
-  border: 1px solid #8e68be;
-  background: #38254e;
-}
-.info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 15px;
-}
-.info > div {
-  padding: 13px 8px;
-  text-align: center;
-  border-radius: 12px;
-  background: #ffffff08;
-  border: 1px solid #ffffff14;
-}
-.info strong {
-  display: block;
-  margin-top: 5px;
-  color: var(--gold);
-  font-size: 19px;
-}
-.info small { color: #c9b9df; }
-.rules {
-  margin-top: 18px;
-  color: #c6b6d8;
-  text-align: center;
-  font-size: 12px;
-  line-height: 1.7;
-}
-footer {
-  text-align: center;
-  color: #87759d;
-  font-size: 11px;
-  margin: 22px 0 8px;
-}
-  
-/* Wadah efek bintang */
-.sparkle-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 5;
-}
-
-/* Bintang yang terbang */
-.sparkle-star {
-  position: absolute;
-  color: #ffe89a;
-  font-size: 18px;
-  text-shadow: 0 0 8px #f7d578, 0 0 18px #fff0ad;
-  animation: sparkleFly 1.1s ease-out forwards;
-}
-
-@keyframes sparkleFly {
-  0% {
-    opacity: 0;
-    transform: translate(0, 12px) scale(0.3) rotate(0deg);
-  }
-  20% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--dx), -65px) scale(1.4) rotate(150deg);
-  }
-}
-
-/* Wadah efek bintang */
-.sparkle-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 5;
-}
-
-/* Bintang yang terbang */
-.sparkle-star {
-  position: absolute;
-  color: #ffe89a;
-  font-size: 18px;
-  text-shadow: 0 0 8px #f7d578, 0 0 18px #fff0ad;
-  animation: sparkleFly 1.1s ease-out forwards;
-}
-
-@keyframes sparkleFly {
-  0% {
-    opacity: 0;
-    transform: translate(0, 12px) scale(0.3) rotate(0deg);
-  }
-  20% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--dx), -65px) scale(1.4) rotate(150deg);
-  }
-}
-
-/* BIG WIN POPUP */
-.bigwin-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 9999;
-  animation: winFade 0.25s ease;
-}
-
-.bigwin-card {
-  text-align: center;
-  padding: 28px;
-  border: 2px solid #ffe45c;
-  border-radius: 22px;
-  background: linear-gradient(145deg, #3b2100, #100b00);
-  box-shadow: 0 0 30px #ffbd19;
-  animation: winPop 0.45s ease;
-}
-
-.bigwin-title {
-  color: #ffe45c;
-  font-size: clamp(34px, 10vw, 58px);
-  font-weight: 900;
-  text-shadow: 0 0 15px #ff9800;
-}
-
-.bigwin-subtitle {
-  color: white;
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-@keyframes winPop {
-  0% { transform: scale(0.3); }
-  75% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-@keyframes winFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
+:root{--gold:#f7d578;--purple:#9a67ff;--bg:#10091c;--panel:#211535}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:22px 14px;color:#fff;font-family:system-ui,Arial,sans-serif;background:radial-gradient(ellipse at top,#382052 0,transparent 55%),var(--bg)}
+.container{max-width:440px;margin:auto}
+header{text-align:center;padding:18px 0 22px}
+.logo{font-size:clamp(27px,8vw,38px);font-weight:1000;letter-spacing:2px;color:var(--gold);animation:goldenGlow 2s ease-in-out infinite alternate}
+.subtitle{color:#d5bdfc;letter-spacing:4px;font-size:11px;margin-top:5px}
+.card{position:relative;overflow:hidden;padding:22px 16px;border:1px solid #9973cf77;border-radius:22px;background:linear-gradient(145deg,#2c1c43,#180f28);box-shadow:0 0 18px #f7d57822,0 15px 45px #0005}
+.card::after{content:"";position:absolute;top:0;left:-150%;width:70%;height:100%;pointer-events:none;background:linear-gradient(110deg,transparent,#fff4c433,#f7d57866,transparent);transform:skewX(-20deg);animation:shineSweep 5s ease-in-out infinite}
+.label{text-align:center;color:#d6c5f4;font-size:12px;letter-spacing:2px}
+.balance{margin:8px 0 20px;text-align:center;font-size:32px;font-weight:900;color:var(--gold)}
+.reels{position:relative;display:flex;justify-content:center;gap:9px;padding:15px 8px;border:2px solid #d2a84f;border-radius:18px;background:#120c1c;box-shadow:inset 0 0 20px #9c70e326}
+.reel{flex:1;max-width:100px;height:90px;display:grid;place-items:center;font-size:49px;border-radius:12px;color:#21132f;background:linear-gradient(150deg,#fff5d7,#e8d4a1);box-shadow:inset 0 -5px 0 #b89a5a;transition:box-shadow .25s,border-color .25s}
+.reel.spinning{animation:pulse .12s infinite alternate;box-shadow:0 0 12px #f7d578,0 0 25px #f7d57899,inset 0 -5px 0 #b89a5a}
+.reel.neon-stop{border:2px solid #ffe45c;box-shadow:0 0 8px #ffe45c,0 0 18px #ffb700,0 0 32px #ffb700b3}
+.result{text-align:center;min-height:48px;padding:16px 0 4px;color:#e5d7ff;font-size:14px}
+button{position:relative;z-index:1;width:100%;border:0;border-radius:13px;padding:14px 12px;font-size:15px;font-weight:850;cursor:pointer;touch-action:manipulation}
+button:disabled{opacity:.55;cursor:wait}
+.spin{margin-top:10px;color:#271631;background:linear-gradient(100deg,#e5b84d,#fff0ad,#d6a43b);box-shadow:0 5px 0 #89602a,0 0 20px #e8b84b22;animation:buttonGlow 2s ease-in-out infinite alternate}
+.secondary{margin-top:12px;color:#e6d7ff;border:1px solid #8e68be;background:#38254e}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+.info>div{padding:13px 8px;text-align:center;border-radius:12px;background:#ffffff08;border:1px solid #ffffff14}
+.info strong{display:block;margin-top:5px;color:var(--gold);font-size:19px}
+.info small{color:#c9b9df}
+.rules{margin-top:18px;color:#c6b6d8;text-align:center;font-size:12px;line-height:1.7}
+footer{text-align:center;color:#87759d;font-size:11px;margin:22px 0 8px}
+.sparkle-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.sparkle-star{position:absolute;color:#ffe89a;font-size:18px;text-shadow:0 0 8px #f7d578,0 0 18px #fff0ad;animation:sparkleFly 1.1s ease-out forwards}
+.bigwin-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:#0009;z-index:9999;animation:winFade .25s ease}
+.bigwin-card{text-align:center;padding:28px;border:2px solid #ffe45c;border-radius:22px;background:linear-gradient(145deg,#3b2100,#100b00);box-shadow:0 0 30px #ffbd19;animation:winPop .45s ease}
+.bigwin-title{color:#ffe45c;font-size:clamp(34px,10vw,58px);font-weight:900;text-shadow:0 0 15px #ff9800}
+.bigwin-subtitle{color:#fff;font-size:18px;margin-top:10px}
+@keyframes goldenGlow{from{text-shadow:0 0 8px #f7d57855}to{text-shadow:0 0 12px #f7d578,0 0 28px #f7d578aa,0 0 45px #9a67ff66}}
+@keyframes shineSweep{0%,65%{left:-150%}100%{left:180%}}
+@keyframes buttonGlow{from{box-shadow:0 5px 0 #89602a,0 0 8px #e8b84b22}to{box-shadow:0 5px 0 #89602a,0 0 22px #f7d57899}}
+@keyframes pulse{from{transform:translateY(-2px)}to{transform:translateY(2px)}}
+@keyframes sparkleFly{0%{opacity:0;transform:translate(0,12px) scale(.3) rotate(0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-65px) scale(1.4) rotate(150deg)}}
+@keyframes winPop{0%{transform:scale(.3)}75%{transform:scale(1.1)}100%{transform:scale(1)}}
+@keyframes winFade{from{opacity:0}to{opacity:1}}
 </style>
 </head>
-
 <body>
 <main class="container">
-  <header>
-    <div class="logo">✦ GOLDEN SPIN ✦</div>
-    <div class="subtitle">PREMIUM ARCADE DEMO</div>
-  </header>
-
-  <section class="card">
-    <div class="label">SALDO KREDIT VIRTUAL</div>
-    <div class="balance" id="balance">1.000 PTS</div>
-    <div class="sparkle-layer" id="sparkleLayer"></div>
-    <div class="reels" aria-label="Simbol permainan">
-      <div class="reel" id="r1">🍒</div>
-      <div class="reel" id="r2">⭐</div>
-      <div class="reel" id="r3">🍇</div>
-    </div>
-
-    <div class="result" id="result" aria-live="polite">
-      Selamat datang! Mainkan demo gratis.
-    </div>
-
-    <button class="spin" id="spin" onclick="spin()">
-      ✨ PUTAR DEMO ✨
-    </button>
-    <button class="secondary" onclick="resetGame()">
-      ↻ RESET KREDIT
-    </button>
-    
-<button class="secondary" id="soundButton" onclick="toggleSound()">
-  🔊 SUARA: ON
-</button>
-    
-<button class="secondary" id="musicButton" onclick="toggleMusic()">
-  🎵 MUSIK: OFF
-</button>
-
-
-
-    <div class="info">
-      <div>
-        <small>Total putaran</small>
-        <strong id="rounds">0</strong>
-      </div>
-      <div>
-        <small>Simbol cocok</small>
-        <strong id="matches">0</strong>
-      </div>
-    </div>
-
-    <div class="rules">
-      Cocokkan simbol untuk mendapatkan poin virtual.<br>
-      Tiga simbol sama: +100 poin.<br>
-      Dua simbol sama: +20 poin.
-    </div>
-  </section>
-
-  <footer>
-    GOLDEN SPIN DEMO · HANYA UNTUK HIBURAN<br>
-    Kredit virtual tidak memiliki nilai uang dan tidak dapat diuangkan.
-  </footer>
+<header><div class="logo">✦ GOLDEN SPIN ✦</div><div class="subtitle">PREMIUM ARCADE DEMO</div></header>
+<section class="card">
+<div class="label">SALDO KREDIT VIRTUAL</div>
+<div class="balance" id="balance">1.000 PTS</div>
+<div class="sparkle-layer" id="sparkleLayer"></div>
+<div class="reels" aria-label="Simbol permainan">
+<div class="reel" id="r1">🍒</div><div class="reel" id="r2">⭐</div><div class="reel" id="r3">🍇</div>
+</div>
+<div class="result" id="result" aria-live="polite">Selamat datang! Mainkan demo gratis.</div>
+<button class="spin" id="spin" type="button" onclick="spin()">✨ PUTAR DEMO ✨</button>
+<button class="secondary" type="button" onclick="resetGame()">↻ RESET KREDIT</button>
+<button class="secondary" id="soundButton" type="button" onclick="toggleSound()">🔊 SUARA: ON</button>
+<button class="secondary" id="musicButton" type="button" onclick="toggleMusic()">🎵 MUSIK: OFF</button>
+<div class="info">
+<div><small>Total putaran</small><strong id="rounds">0</strong></div>
+<div><small>Simbol cocok</small><strong id="matches">0</strong></div>
+</div>
+<div class="rules">Cocokkan simbol untuk mendapatkan poin virtual.<br>Tiga simbol sama: +100 poin.<br>Dua simbol sama: +20 poin.</div>
+</section>
+<footer>GOLDEN SPIN DEMO · HANYA UNTUK HIBURAN<br>Kredit virtual tidak memiliki nilai uang dan tidak dapat diuangkan.</footer>
 </main>
-
 <script>
-const symbols = ["🍒", "🍋", "🍇", "🍉", "⭐", "🔔"];
-
-let credits = 1000;
-let rounds = 0;
-let matches = 0;
-let busy = false;
-
+"use strict";
+const symbols = ["🍒","🍋","🍇","🍉","⭐","🔔"];
+let credits = 1000, rounds = 0, matches = 0, busy = false;
 const $ = id => document.getElementById(id);
 
 function update() {
-  $("balance").textContent =
-    credits.toLocaleString("id-ID") + " PTS";
+  $("balance").textContent = credits.toLocaleString("id-ID") + " PTS";
   $("rounds").textContent = rounds;
   $("matches").textContent = matches;
 }
-
 function randomSymbol() {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
-
 function spin() {
   if (busy) return;
   playTone(600, 0.1);
-
   busy = true;
   $("spin").disabled = true;
-
-  // Kredit hanya skor demo, bukan taruhan uang.
   rounds++;
+  update();
   const result = [randomSymbol(), randomSymbol(), randomSymbol()];
-
-  ["r1", "r2", "r3"].forEach((id, i) => {
-    $(id).classList.add("spinning");
-  });
-
+  ["r1","r2","r3"].forEach(id => $(id).classList.add("spinning"));
   $("result").textContent = "✨ Mengacak simbol...";
-
   let ticks = 0;
   const timer = setInterval(() => {
-    ["r1", "r2", "r3"].forEach(id => {
-      $(id).textContent = randomSymbol();
-    });
-
+    ["r1","r2","r3"].forEach(id => { $(id).textContent = randomSymbol(); });
     ticks++;
-
     if (ticks >= 12) {
       clearInterval(timer);
-
       result.forEach((symbol, i) => {
-        $("r" + (i + 1)).textContent = symbol;
-        $("r" + (i + 1)).classList.remove("spinning");
+        const reel = $("r" + (i + 1));
+        reel.textContent = symbol;
+        reel.classList.remove("spinning");
+        reel.classList.add("neon-stop");
       });
-
+      setTimeout(() => ["r1","r2","r3"].forEach(id => $(id).classList.remove("neon-stop")), 1300);
       finish(result);
     }
   }, 100);
 }
-
-  document.body.appendChild(overlay);
-
-  overlay.addEventListener("click", () => overlay.remove());
-
-  setTimeout(() => overlay.remove(), 2200);
-}
-
-  function showBigWin() {
+function showBigWin() {
   const old = document.querySelector(".bigwin-overlay");
   if (old) old.remove();
-
   const overlay = document.createElement("div");
   overlay.className = "bigwin-overlay";
-
-  overlay.innerHTML = `
-    <div class="bigwin-card">
-      <div class="bigwin-title">👑 BIG WIN! 👑</div>
-      <div class="bigwin-subtitle">
-        JACKPOT DEMO<br>+100 POIN VIRTUAL
-      </div>
-    </div>
-  `;
-
-  
+  overlay.innerHTML = '<div class="bigwin-card"><div class="bigwin-title">👑 BIG WIN! 👑</div><div class="bigwin-subtitle">JACKPOT DEMO<br>+100 POIN VIRTUAL<br><small>Ketuk untuk menutup</small></div></div>';
+  document.body.appendChild(overlay);
+  overlay.addEventListener("click", () => overlay.remove());
+  setTimeout(() => overlay.remove(), 2200);
 }
-
-
 function finish(result) {
-  const [a, b, c] = result;
   let message = "Belum cocok. Coba lagi!";
   const unique = new Set(result).size;
-
   if (unique === 1) {
     credits += 100;
     matches++;
@@ -520,135 +134,81 @@ function finish(result) {
     matches++;
     message = "✨ Simbol cocok! +20 poin";
   }
-
   credits = Math.min(credits, 999999999);
   update();
-
   $("result").textContent = message;
   showSparkles();
   playTone(780, 0.2);
-
   busy = false;
   $("spin").disabled = false;
 }
-
-  
 function resetGame() {
   if (busy) return;
-
-  credits = 1000;
-  rounds = 0;
-  matches = 0;
-
-  ["r1", "r2", "r3"].forEach(id => {
-    $(id).textContent = "✨";
-  });
-
+  credits = 1000; rounds = 0; matches = 0;
+  ["r1","r2","r3"].forEach(id => { $(id).textContent = "✨"; });
   $("result").textContent = "Kredit demo sudah direset!";
   update();
 }
-</script>
-
-<script>
 let audioContext;
 let soundEnabled = true;
-
 function playTone(frequency = 440, duration = 0.12) {
   if (!soundEnabled) return;
-
   try {
     audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
-
-    if (audioContext.state === "suspended") {
-      audioContext.resume();
-    }
-
+    if (audioContext.state === "suspended") audioContext.resume();
     const oscillator = audioContext.createOscillator();
     const gain = audioContext.createGain();
-
     oscillator.frequency.value = frequency;
     gain.gain.setValueAtTime(0.08, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + duration
-    );
-
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + duration);
-  } catch (error) {
-    console.log("Audio tidak tersedia");
-  }
+    gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+    oscillator.connect(gain); gain.connect(audioContext.destination);
+    oscillator.start(); oscillator.stop(audioContext.currentTime + duration);
+  } catch (error) { console.log("Audio tidak tersedia"); }
 }
-
 function toggleSound() {
   soundEnabled = !soundEnabled;
-  document.getElementById("soundButton").textContent =
-    soundEnabled ? "🔊 SUARA: ON" : "🔇 SUARA: OFF";
+  $("soundButton").textContent = soundEnabled ? "🔊 SUARA: ON" : "🔇 SUARA: OFF";
+  if (!soundEnabled) stopMusic();
 }
-let musicPlaying = false;
-let musicTimer = null;
-let musicStep = 0;
-
+let musicPlaying = false, musicTimer = null, musicStep = 0;
 function playMusicNote() {
   if (!soundEnabled || !musicPlaying || !audioContext) return;
-
-  const notes = [261.63, 329.63, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23];
-  const osc = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-
-  osc.type = "sine";
-  osc.frequency.value = notes[musicStep % notes.length];
-
+  const notes = [261.63,329.63,392,329.63,293.66,349.23,440,349.23];
+  const osc = audioContext.createOscillator(), gain = audioContext.createGain();
+  osc.type = "sine"; osc.frequency.value = notes[musicStep % notes.length];
   const now = audioContext.currentTime;
   gain.gain.setValueAtTime(0.0001, now);
   gain.gain.linearRampToValueAtTime(0.025, now + 0.04);
   gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
-
-  osc.connect(gain);
-  gain.connect(audioContext.destination);
-  osc.start(now);
-  osc.stop(now + 0.3);
-
-  musicStep++;
+  osc.connect(gain); gain.connect(audioContext.destination);
+  osc.start(now); osc.stop(now + 0.3); musicStep++;
 }
-
 function startMusic() {
-  audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
-
-  if (audioContext.state === "suspended") {
-    audioContext.resume();
-  }
-
-  if (musicPlaying) return;
-
-  musicPlaying = true;
-  playMusicNote();
-  musicTimer = setInterval(playMusicNote, 350);
+  try {
+    audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
+    if (audioContext.state === "suspended") audioContext.resume();
+    if (musicPlaying) return;
+    if (!soundEnabled) { soundEnabled = true; $("soundButton").textContent = "🔊 SUARA: ON"; }
+    musicPlaying = true; playMusicNote(); musicTimer = setInterval(playMusicNote, 350);
+  } catch (error) { $("result").textContent = "Audio tidak tersedia di browser ini."; }
 }
-
 function stopMusic() {
   musicPlaying = false;
-  clearInterval(musicTimer);
+  if (musicTimer) clearInterval(musicTimer);
   musicTimer = null;
 }
-
 function toggleMusic() {
   if (musicPlaying) {
-    stopMusic();
-    document.getElementById("musicButton").textContent = "🎵 MUSIK: OFF";
+    stopMusic(); $("musicButton").textContent = "🎵 MUSIK: OFF";
   } else {
     startMusic();
-    document.getElementById("musicButton").textContent = "🎵 MUSIK: ON";
+    if (musicPlaying) $("musicButton").textContent = "🎵 MUSIK: ON";
   }
 }
 function showSparkles() {
-  const layer = document.getElementById("sparkleLayer");
+  const layer = $("sparkleLayer");
   if (!layer) return;
-
   layer.replaceChildren();
-
   for (let i = 0; i < 14; i++) {
     const star = document.createElement("span");
     star.className = "sparkle-star";
@@ -659,66 +219,9 @@ function showSparkles() {
     star.style.animationDelay = (Math.random() * 0.2) + "s";
     layer.appendChild(star);
   }
-
   setTimeout(() => layer.replaceChildren(), 1600);
 }
-
-
+update();
 </script>
-
-<style>
-/* Efek neon GOLDEN SPIN DEMO */
-#r1, #r2, #r3 {
-  transition: box-shadow 0.25s ease,
-              border-color 0.25s ease;
-}
-
-#r1.neon-stop,
-#r2.neon-stop,
-#r3.neon-stop {
-  border-color: #ffe45c !important;
-  box-shadow:
-    0 0 8px #ffe45c,
-    0 0 18px #ffb700,
-    0 0 32px rgba(255, 183, 0, 0.7);
-}
-</style>
-
-<script>
-(function () {
-  const reels = document.querySelectorAll("#r1, #r2, #r3");
-
-  if (typeof window.finish !== "function") return;
-
-  const originalFinish = window.finish;
-
-  window.finish = function () {
-    const result = originalFinish.apply(this, arguments);
-
-    reels.forEach(function (reel) {
-      reel.classList.remove("neon-stop");
-      void reel.offsetWidth;
-      reel.classList.add("neon-stop");
-    });
-
-    setTimeout(function () {
-      reels.forEach(function (reel) {
-        reel.classList.remove("neon-stop");
-      });
-    }, 1300);
-
-    return result;
-  };
-})();
-  
-const spinButton = document.getElementById("spin");
-
-if (spinButton) {
-  spinButton.addEventListener("click", spin);
-}
-
-</script>
-
 </body>
 </html>
-
