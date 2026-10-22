@@ -245,6 +245,7 @@ function randomSymbol() {
 
 function spin() {
   if (busy) return;
+  playTone(600, 0.1);
 
   busy = true;
   $("spin").disabled = true;
