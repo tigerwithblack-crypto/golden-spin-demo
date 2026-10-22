@@ -485,28 +485,6 @@ function spin() {
   setTimeout(() => overlay.remove(), 2200);
 }
 
-function showBigWin() {
-  const old = document.querySelector(".bigwin-overlay");
-  if (old) old.remove();
-
-  const overlay = document.createElement("div");
-  overlay.className = "bigwin-overlay";
-
-  overlay.innerHTML = `
-    <div class="bigwin-card">
-      <div class="bigwin-title">👑 BIG WIN! 👑</div>
-      <div class="bigwin-subtitle">
-        JACKPOT DEMO<br>+100 POIN VIRTUAL
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(overlay);
-
-  overlay.addEventListener("click", () => overlay.remove());
-
-  setTimeout(() => overlay.remove(), 2200);
-}
   
  function finish(result) {
   const [a, b, c] = result;
