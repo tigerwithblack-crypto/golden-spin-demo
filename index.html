@@ -485,6 +485,55 @@ function spin() {
   setTimeout(() => overlay.remove(), 2200);
 }
 
+  function showBigWin() {
+  const old = document.querySelector(".bigwin-overlay");
+  if (old) old.remove();
+
+  const overlay = document.createElement("div");
+  overlay.className = "bigwin-overlay";
+
+  overlay.innerHTML = `
+    <div class="bigwin-card">
+      <div class="bigwin-title">👑 BIG WIN! 👑</div>
+      <div class="bigwin-subtitle">
+        JACKPOT DEMO<br>+100 POIN VIRTUAL
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  overlay.addEventListener("click", () => overlay.remove());
+
+  setTimeout(() => overlay.remove(), 2200);
+}
+
+function finish(result) {
+  const [a, b, c] = result;
+  let message = "Belum cocok. Coba lagi!";
+  const unique = new Set(result).size;
+
+  if (unique === 1) {
+  credits += 100;
+  matches++;
+  message = "👑 JACKPOT DEMO! +100 poin";
+  showBigWin();
+  }
+  } else if (unique === 2) {
+    credits += 20;
+    matches++;
+    message = "✨ Simbol cocok! +20 poin";
+  }
+
+  credits = Math.min(credits, 999999999);
+  update();
+
+  $("result").textContent = message;
+  showSparkles();
+  playTone(780, 0.2); 
+  busy = false;
+  $("spin").disabled = false;
+  }
   
  function finish(result) {
   const [a, b, c] = result;
