@@ -507,9 +507,8 @@ function showBigWin() {
 
   setTimeout(() => overlay.remove(), 2200);
 }
-
-
-function finish(result) {
+  
+ function finish(result) {
   const [a, b, c] = result;
   let message = "Belum cocok. Coba lagi!";
   const unique = new Set(result).size;
