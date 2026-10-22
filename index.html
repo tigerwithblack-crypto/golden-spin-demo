@@ -300,6 +300,7 @@ function finish(result) {
   update();
 
   $("result").textContent = message;
+  playTone(780, 0.2); 
   busy = false;
   $("spin").disabled = false;
 }
