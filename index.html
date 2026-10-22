@@ -91,6 +91,86 @@ header {
 }
 .reel.spinning {
   animation: pulse .12s infinite alternate;
+  
+/* Cahaya emas pada panel permainan */
+.card {
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 18px #f7d57822,
+    0 15px 45px #0005;
+}
+
+/* Kilauan bergerak pada logo */
+.logo {
+  animation: goldenGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes goldenGlow {
+  from {
+    text-shadow: 0 0 8px #f7d57855;
+  }
+  to {
+    text-shadow:
+      0 0 12px #f7d578,
+      0 0 28px #f7d578aa,
+      0 0 45px #9a67ff66;
+  }
+}
+/* Garis kilauan yang bergerak di panel */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 70%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent,
+    #fff4c433,
+    #f7d57866,
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shineSweep 5s ease-in-out infinite;
+}
+
+@keyframes shineSweep {
+  0%, 65% {
+    left: -150%;
+  }
+  100% {
+    left: 180%;
+  }
+}
+
+/* Cahaya lembut di tombol putar */
+.spin {
+  animation: buttonGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes buttonGlow {
+  from {
+    box-shadow: 0 5px 0 #89602a, 0 0 8px #e8b84b22;
+  }
+  to {
+    box-shadow:
+      0 5px 0 #89602a,
+      0 0 22px #f7d57899;
+  }
+}
+
+
+/* Cahaya pada kotak simbol saat berputar */
+.reel.spinning {
+  box-shadow:
+    0 0 12px #f7d578,
+    0 0 25px #f7d57899,
+    inset 0 -5px 0 #b89a5a;
+}
+
 }
 @keyframes pulse {
   from { transform: translateY(-2px); }
