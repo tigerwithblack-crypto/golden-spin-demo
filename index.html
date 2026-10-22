@@ -192,6 +192,11 @@ footer {
     <button class="secondary" onclick="resetGame()">
       ↻ RESET KREDIT
     </button>
+    
+<button class="secondary" id="soundButton" onclick="toggleSound()">
+  🔊 SUARA: ON
+</button>
+
 
     <div class="info">
       <div>
@@ -313,6 +318,47 @@ function resetGame() {
   update();
 }
 </script>
+
+<script>
+let audioContext;
+let soundEnabled = true;
+
+function playTone(frequency = 440, duration = 0.12) {
+  if (!soundEnabled) return;
+
+  try {
+    audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.frequency.value = frequency;
+    gain.gain.setValueAtTime(0.08, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + duration
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + duration);
+  } catch (error) {
+    console.log("Audio tidak tersedia");
+  }
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  document.getElementById("soundButton").textContent =
+    soundEnabled ? "🔊 SUARA: ON" : "🔇 SUARA: OFF";
+}
+</script>
+
 </body>
 </html>
 
