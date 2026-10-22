@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#170e29">
 <title>GOLDEN SPIN DEMO</title>
-
+  
 <style>
 :root {
   --gold: #f7d578;
@@ -68,6 +68,7 @@ header {
   color: var(--gold);
 }
 .reels {
+  position: relative;
   display: flex;
   justify-content: center;
   gap: 9px;
@@ -242,6 +243,71 @@ footer {
   font-size: 11px;
   margin: 22px 0 8px;
 }
+  
+/* Wadah efek bintang */
+.sparkle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Bintang yang terbang */
+.sparkle-star {
+  position: absolute;
+  color: #ffe89a;
+  font-size: 18px;
+  text-shadow: 0 0 8px #f7d578, 0 0 18px #fff0ad;
+  animation: sparkleFly 1.1s ease-out forwards;
+}
+
+@keyframes sparkleFly {
+  0% {
+    opacity: 0;
+    transform: translate(0, 12px) scale(0.3) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), -65px) scale(1.4) rotate(150deg);
+  }
+}
+
+/* Wadah efek bintang */
+.sparkle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Bintang yang terbang */
+.sparkle-star {
+  position: absolute;
+  color: #ffe89a;
+  font-size: 18px;
+  text-shadow: 0 0 8px #f7d578, 0 0 18px #fff0ad;
+  animation: sparkleFly 1.1s ease-out forwards;
+}
+
+@keyframes sparkleFly {
+  0% {
+    opacity: 0;
+    transform: translate(0, 12px) scale(0.3) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), -65px) scale(1.4) rotate(150deg);
+  }
+}
+
 </style>
 </head>
 
@@ -255,7 +321,7 @@ footer {
   <section class="card">
     <div class="label">SALDO KREDIT VIRTUAL</div>
     <div class="balance" id="balance">1.000 PTS</div>
-
+    <div class="sparkle-layer" id="sparkleLayer"></div>
     <div class="reels" aria-label="Simbol permainan">
       <div class="reel" id="r1">🍒</div>
       <div class="reel" id="r2">⭐</div>
@@ -385,6 +451,7 @@ function finish(result) {
   update();
 
   $("result").textContent = message;
+  showSparkles();
   playTone(780, 0.2); 
   busy = false;
   $("spin").disabled = false;
@@ -500,6 +567,26 @@ function toggleMusic() {
     document.getElementById("musicButton").textContent = "🎵 MUSIK: ON";
   }
 }
+function showSparkles() {
+  const layer = document.getElementById("sparkleLayer");
+  if (!layer) return;
+
+  layer.replaceChildren();
+
+  for (let i = 0; i < 14; i++) {
+    const star = document.createElement("span");
+    star.className = "sparkle-star";
+    star.textContent = Math.random() > 0.5 ? "✦" : "✧";
+    star.style.left = (8 + Math.random() * 84) + "%";
+    star.style.top = (20 + Math.random() * 65) + "%";
+    star.style.setProperty("--dx", (Math.random() * 100 - 50) + "px");
+    star.style.animationDelay = (Math.random() * 0.2) + "s";
+    layer.appendChild(star);
+  }
+
+  setTimeout(() => layer.replaceChildren(), 1600);
+}
+
 
 </script>
 
