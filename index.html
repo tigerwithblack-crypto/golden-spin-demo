@@ -308,6 +308,52 @@ footer {
   }
 }
 
+/* BIG WIN POPUP */
+.bigwin-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  animation: winFade 0.25s ease;
+}
+
+.bigwin-card {
+  text-align: center;
+  padding: 28px;
+  border: 2px solid #ffe45c;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #3b2100, #100b00);
+  box-shadow: 0 0 30px #ffbd19;
+  animation: winPop 0.45s ease;
+}
+
+.bigwin-title {
+  color: #ffe45c;
+  font-size: clamp(34px, 10vw, 58px);
+  font-weight: 900;
+  text-shadow: 0 0 15px #ff9800;
+}
+
+.bigwin-subtitle {
+  color: white;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+@keyframes winPop {
+  0% { transform: scale(0.3); }
+  75% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes winFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 </style>
 </head>
 
@@ -432,15 +478,40 @@ function spin() {
   }, 100);
 }
 
+function showBigWin() {
+  const old = document.querySelector(".bigwin-overlay");
+  if (old) old.remove();
+
+  const overlay = document.createElement("div");
+  overlay.className = "bigwin-overlay";
+
+  overlay.innerHTML = `
+    <div class="bigwin-card">
+      <div class="bigwin-title">👑 BIG WIN! 👑</div>
+      <div class="bigwin-subtitle">
+        JACKPOT DEMO<br>+100 POIN VIRTUAL
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  overlay.addEventListener("click", () => overlay.remove());
+
+  setTimeout(() => overlay.remove(), 2200);
+}
+
 function finish(result) {
   const [a, b, c] = result;
   let message = "Belum cocok. Coba lagi!";
   const unique = new Set(result).size;
 
   if (unique === 1) {
-    credits += 100;
-    matches++;
-    message = "👑 JACKPOT DEMO! +100 poin";
+  credits += 100;
+  matches++;
+  message = "👑 JACKPOT DEMO! +100 poin";
+  showBigWin();
+  }
   } else if (unique === 2) {
     credits += 20;
     matches++;
