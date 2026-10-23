@@ -118,6 +118,11 @@ footer{text-align:center;color:#87759d;font-size:11px;margin:22px 0 8px}
 </style>
 </head>
 <body>
+  <div id="loading-screen">
+  <div class="loading-logo">GOLDEN SPIN</div>
+  <div class="loading-ring"></div>
+  <div class="loading-text">LOADING...</div>
+  </div>
 <img src="logo.png"
      alt="GOLDEN SPIN DEMO"
      class="logo">
@@ -297,5 +302,18 @@ function showSparkles() {
 }
 update();
 </script>
+  <script>
+window.addEventListener("load", function () {
+  const loader = document.getElementById("loading-screen");
+
+  if (loader) {
+    loader.classList.add("hidden");
+
+    setTimeout(function () {
+      loader.remove();
+    }, 600);
+  }
+});
+  </script>
 </body>
 </html>
