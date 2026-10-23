@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -310,6 +311,105 @@ button:disabled { opacity: .55; cursor: wait; }
   line-height: 1.7;
 }
 
+/* RIWAYAT PUTARAN */
+.history {
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+  padding: 16px;
+  border: 1px solid #9a67ff66;
+  border-radius: 17px;
+  background: #120c1caa;
+}
+
+.history-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.history-title {
+  color: var(--gold);
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.history-subtitle,
+.history-note {
+  margin-top: 5px;
+  color: #c9b9df;
+  font-size: 11px;
+}
+
+.history-clear {
+  width: auto;
+  padding: 9px 12px;
+  color: #fff;
+  background: #38254e;
+  border: 1px solid #8e68be;
+  font-size: 11px;
+}
+
+.history-list {
+  display: grid;
+  gap: 9px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px;
+  border: 1px solid #ffffff14;
+  border-radius: 11px;
+  background: #ffffff08;
+}
+
+.history-symbols {
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.history-detail {
+  min-width: 0;
+  flex: 1;
+}
+
+.history-outcome {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.history-time {
+  margin-top: 4px;
+  color: #c9b9df;
+  font-size: 10px;
+}
+
+.history-points {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.history-points.win { color: #8ff0b2; }
+.history-points.none { color: #c9b9df; }
+
+.history-empty {
+  padding: 18px 8px;
+  color: #c9b9df;
+  text-align: center;
+  font-size: 12px;
+  border: 1px dashed #8e68be66;
+  border-radius: 10px;
+}
+
 footer {
   text-align: center;
   color: #87759d;
@@ -462,6 +562,10 @@ footer {
   .profile-stat strong { font-size: 13px; }
   .reel { height: 76px; font-size: 40px; }
   .balance { font-size: 27px; }
+  .history { padding: 12px; }
+  .history-item { padding: 8px; gap: 6px; }
+  .history-symbols { font-size: 18px; }
+  .history-points { font-size: 11px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -480,111 +584,138 @@ footer {
   <div class="loading-text">LOADING...</div>
 </div>
 
-<img src="./logo.png" alt="GOLDEN SPIN DEMO" class="logo-image">
-
 <main class="container">
-<header>
-  <div class="logo-text">✦ GOLDEN SPIN ✦</div>
-  <div class="subtitle">PREMIUM ARCADE DEMO</div>
-</header>
+  <img src="./logo.png" alt="GOLDEN SPIN DEMO" class="logo-image">
 
-<section class="card">
+  <header>
+    <div class="logo-text">✦ GOLDEN SPIN ✦</div>
+    <div class="subtitle">PREMIUM ARCADE DEMO</div>
+  </header>
 
-  <!-- PROFIL PEMAIN DEMO -->
-  <section class="profile">
-    <div class="profile-heading">
-      <div class="avatar">👤</div>
-      <div>
-        <div class="profile-title" id="profileDisplayName">Pemain Demo</div>
-        <div class="profile-level" id="profileLevel">🏅 Pemain Pemula</div>
+  <section class="card">
+
+    <!-- PROFIL PEMAIN -->
+    <section class="profile">
+      <div class="profile-heading">
+        <div class="avatar">👤</div>
+        <div>
+          <div class="profile-title" id="profileDisplayName">Pemain Demo</div>
+          <div class="profile-level" id="profileLevel">🏅 Pemain Pemula</div>
+        </div>
       </div>
+
+      <label class="profile-label" for="profileName">
+        Nama panggilan
+      </label>
+
+      <input
+        class="profile-input"
+        id="profileName"
+        type="text"
+        maxlength="20"
+        placeholder="Tulis nama panggilan"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+      <button class="profile-save" id="saveProfile" type="button">
+        💾 SIMPAN PROFIL
+      </button>
+
+      <div class="profile-message" id="profileMessage" aria-live="polite">
+        Nama disimpan di browser perangkat ini.
+      </div>
+
+      <div class="profile-stats">
+        <div class="profile-stat">
+          <small>Putaran</small>
+          <strong id="profileRounds">0</strong>
+        </div>
+        <div class="profile-stat">
+          <small>Cocok</small>
+          <strong id="profileMatches">0</strong>
+        </div>
+        <div class="profile-stat">
+          <small>Kredit</small>
+          <strong id="profileCredits">1.000</strong>
+        </div>
+      </div>
+    </section>
+
+    <div class="label">SALDO KREDIT VIRTUAL</div>
+    <div class="balance" id="balance">1.000 PTS</div>
+    <div class="sparkle-layer" id="sparkleLayer"></div>
+
+    <div class="reels" aria-label="Simbol permainan">
+      <div class="reel" id="r1">🍒</div>
+      <div class="reel" id="r2">⭐</div>
+      <div class="reel" id="r3">🍇</div>
     </div>
 
-    <label class="profile-label" for="profileName">
-      Nama panggilan
-    </label>
-    <input
-      class="profile-input"
-      id="profileName"
-      type="text"
-      maxlength="20"
-      placeholder="Tulis nama panggilan"
-      autocomplete="off"
-      spellcheck="false"
-    >
+    <div class="result" id="result" aria-live="polite">
+      Selamat datang! Mainkan demo gratis.
+    </div>
 
-    <button class="profile-save" id="saveProfile" type="button">
-      💾 SIMPAN PROFIL
+    <button class="spin" id="spin" type="button" onclick="spin()">
+      ✨ PUTAR DEMO ✨
     </button>
-    <div class="profile-message" id="profileMessage" aria-live="polite">
-      Nama disimpan di browser perangkat ini.
+
+    <button class="secondary" type="button" onclick="resetGame()">
+      ↻ RESET KREDIT
+    </button>
+
+    <button class="secondary" id="soundButton" type="button" onclick="toggleSound()">
+      🔊 SUARA: ON
+    </button>
+
+    <button class="secondary" id="musicButton" type="button" onclick="toggleMusic()">
+      🎵 MUSIK: OFF
+    </button>
+
+    <div class="info">
+      <div><small>Total putaran</small><strong id="rounds">0</strong></div>
+      <div><small>Simbol cocok</small><strong id="matches">0</strong></div>
     </div>
 
-    <div class="profile-stats">
-      <div class="profile-stat">
-        <small>Putaran</small>
-        <strong id="profileRounds">0</strong>
+    <!-- RIWAYAT PUTARAN DEMO -->
+    <section class="history">
+      <div class="history-heading">
+        <div>
+          <div class="history-title">📜 RIWAYAT PUTARAN</div>
+          <div class="history-subtitle">20 putaran terakhir</div>
+        </div>
+        <button class="history-clear" id="clearHistory" type="button">
+          HAPUS
+        </button>
       </div>
-      <div class="profile-stat">
-        <small>Cocok</small>
-        <strong id="profileMatches">0</strong>
+
+      <div id="historyList" class="history-list">
+        <div class="history-empty">Belum ada riwayat putaran.</div>
       </div>
-      <div class="profile-stat">
-        <small>Kredit</small>
-        <strong id="profileCredits">1.000</strong>
+
+      <div class="history-note">
+        Riwayat tersimpan di browser perangkat ini.
       </div>
+    </section>
+
+    <div class="rules">
+      Cocokkan simbol untuk mendapatkan poin virtual.<br>
+      Tiga simbol sama: +100 poin.<br>
+      Dua simbol sama: +20 poin.
     </div>
   </section>
 
-  <div class="label">SALDO KREDIT VIRTUAL</div>
-  <div class="balance" id="balance">1.000 PTS</div>
-  <div class="sparkle-layer" id="sparkleLayer"></div>
-
-  <div class="reels" aria-label="Simbol permainan">
-    <div class="reel" id="r1">🍒</div>
-    <div class="reel" id="r2">⭐</div>
-    <div class="reel" id="r3">🍇</div>
-  </div>
-
-  <div class="result" id="result" aria-live="polite">
-    Selamat datang! Mainkan demo gratis.
-  </div>
-
-  <button class="spin" id="spin" type="button" onclick="spin()">
-    ✨ PUTAR DEMO ✨
-  </button>
-  <button class="secondary" type="button" onclick="resetGame()">
-    ↻ RESET KREDIT
-  </button>
-  <button class="secondary" id="soundButton" type="button" onclick="toggleSound()">
-    🔊 SUARA: ON
-  </button>
-  <button class="secondary" id="musicButton" type="button" onclick="toggleMusic()">
-    🎵 MUSIK: OFF
-  </button>
-
-  <div class="info">
-    <div><small>Total putaran</small><strong id="rounds">0</strong></div>
-    <div><small>Simbol cocok</small><strong id="matches">0</strong></div>
-  </div>
-
-  <div class="rules">
-    Cocokkan simbol untuk mendapatkan poin virtual.<br>
-    Tiga simbol sama: +100 poin.<br>
-    Dua simbol sama: +20 poin.
-  </div>
-</section>
-
-<footer>
-  GOLDEN SPIN DEMO · HANYA UNTUK HIBURAN<br>
-  Kredit virtual tidak memiliki nilai uang dan tidak dapat diuangkan.
-</footer>
+  <footer>
+    GOLDEN SPIN DEMO · HANYA UNTUK HIBURAN<br>
+    Kredit virtual tidak memiliki nilai uang dan tidak dapat diuangkan.
+  </footer>
 </main>
 
 <script>
 "use strict";
 
 const symbols = ["🍒", "🍋", "🍇", "🍉", "⭐", "🔔"];
+
 let credits = 1000;
 let rounds = 0;
 let matches = 0;
@@ -592,7 +723,7 @@ let busy = false;
 
 const $ = id => document.getElementById(id);
 
-/* PROFIL: hanya menyimpan nama panggilan di browser */
+/* PROFIL PEMAIN */
 const PROFILE_KEY = "goldenSpinDemoProfileName";
 const DEFAULT_PROFILE_NAME = "Pemain Demo";
 
@@ -604,6 +735,7 @@ function loadProfile() {
   try {
     const savedName = localStorage.getItem(PROFILE_KEY);
     const name = cleanProfileName(savedName || DEFAULT_PROFILE_NAME);
+
     $("profileName").value = name;
     $("profileDisplayName").textContent = name || DEFAULT_PROFILE_NAME;
   } catch (error) {
@@ -614,13 +746,11 @@ function loadProfile() {
   }
 }
 
-
 function saveProfile() {
-  const input = document.getElementById("profileName");
-  const display = document.getElementById("profileDisplayName");
-  const message = document.getElementById("profileMessage");
-
-  const name = input.value.trim().replace(/\s+/g, " ").slice(0, 20);
+  const input = $("profileName");
+  const display = $("profileDisplayName");
+  const message = $("profileMessage");
+  const name = cleanProfileName(input.value);
 
   if (!name) {
     message.textContent = "Masukkan nama panggilan dulu!";
@@ -631,22 +761,19 @@ function saveProfile() {
   display.textContent = name;
 
   try {
-    localStorage.setItem("goldenSpinDemoProfileName", name);
+    localStorage.setItem(PROFILE_KEY, name);
 
-    const saved = localStorage.getItem("goldenSpinDemoProfileName");
-
-    if (saved === name) {
-      message.textContent = "✅ Nama berhasil disimpan!";
-    } else {
-      message.textContent = "Nama tampil, tetapi belum tersimpan permanen.";
-    }
+    message.textContent =
+      localStorage.getItem(PROFILE_KEY) === name
+        ? "✅ Nama berhasil disimpan!"
+        : "Nama tampil, tetapi belum tersimpan permanen.";
   } catch (error) {
     message.textContent =
-      "Penyimpanan browser gagal. Coba izinkan penyimpanan situs.";
+      "Penyimpanan browser gagal. Nama hanya tampil sementara.";
   }
 }
 
-/* Level demo berdasarkan total putaran sesi saat ini */
+/* LEVEL DAN STATISTIK */
 function updateProfile() {
   $("profileRounds").textContent = rounds;
   $("profileMatches").textContent = matches;
@@ -666,9 +793,12 @@ function updateProfile() {
 }
 
 function update() {
-  $("balance").textContent = credits.toLocaleString("id-ID") + " PTS";
+  $("balance").textContent =
+    credits.toLocaleString("id-ID") + " PTS";
+
   $("rounds").textContent = rounds;
   $("matches").textContent = matches;
+
   updateProfile();
 }
 
@@ -687,22 +817,147 @@ function randomSymbol() {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
+/* RIWAYAT PUTARAN DEMO */
+const HISTORY_KEY = "goldenSpinDemoHistory";
+const MAX_HISTORY = 20;
+
+let historyItems = [];
+
+function loadHistory() {
+  try {
+    const saved = localStorage.getItem(HISTORY_KEY);
+    const parsed = saved ? JSON.parse(saved) : [];
+
+    historyItems = Array.isArray(parsed)
+      ? parsed.filter(item =>
+          item &&
+          Array.isArray(item.symbols) &&
+          item.symbols.length === 3 &&
+          item.symbols.every(symbol => symbols.includes(symbol)) &&
+          typeof item.outcome === "string" &&
+          typeof item.points === "number" &&
+          Number.isFinite(item.points) &&
+          typeof item.time === "string"
+        ).slice(0, MAX_HISTORY)
+      : [];
+  } catch (error) {
+    historyItems = [];
+  }
+
+  renderHistory();
+}
+
+function renderHistory() {
+  const list = $("historyList");
+  if (!list) return;
+
+  list.replaceChildren();
+
+  if (historyItems.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "history-empty";
+    empty.textContent = "Belum ada riwayat putaran.";
+    list.appendChild(empty);
+    return;
+  }
+
+  historyItems.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "history-item";
+
+    const symbolsEl = document.createElement("div");
+    symbolsEl.className = "history-symbols";
+    symbolsEl.textContent = item.symbols.join(" ");
+
+    const detail = document.createElement("div");
+    detail.className = "history-detail";
+
+    const outcome = document.createElement("div");
+    outcome.className = "history-outcome";
+    outcome.textContent = item.outcome;
+
+    const time = document.createElement("div");
+    time.className = "history-time";
+
+    const date = new Date(item.time);
+
+    time.textContent = Number.isNaN(date.getTime())
+      ? "Waktu tidak tersedia"
+      : date.toLocaleString("id-ID");
+
+    detail.append(outcome, time);
+
+    const points = document.createElement("div");
+    points.className =
+      "history-points " + (item.points > 0 ? "win" : "none");
+
+    points.textContent = item.points > 0
+      ? "+" + item.points + " PTS"
+      : "0 PTS";
+
+    row.append(symbolsEl, detail, points);
+    list.appendChild(row);
+  });
+}
+
+function addHistory(result, outcome, points) {
+  historyItems.unshift({
+    symbols: [...result],
+    outcome,
+    points,
+    time: new Date().toISOString()
+  });
+
+  historyItems = historyItems.slice(0, MAX_HISTORY);
+
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(historyItems));
+  } catch (error) {
+    $("profileMessage").textContent =
+      "Penyimpanan riwayat gagal. Riwayat hanya sementara.";
+  }
+
+  renderHistory();
+}
+
+function clearHistory() {
+  if (busy) return;
+
+  historyItems = [];
+
+  try {
+    localStorage.removeItem(HISTORY_KEY);
+  } catch (error) {
+    // Tampilan tetap dibersihkan.
+  }
+
+  renderHistory();
+}
+
+/* PUTARAN DEMO */
 function spin() {
   if (busy) return;
 
   playTone(600, 0.1);
+
   busy = true;
   $("spin").disabled = true;
+
   rounds++;
   update();
 
-  const result = [randomSymbol(), randomSymbol(), randomSymbol()];
+  const result = [
+    randomSymbol(),
+    randomSymbol(),
+    randomSymbol()
+  ];
 
   ["r1", "r2", "r3"].forEach(id => {
     $(id).classList.add("spinning");
   });
 
   $("result").textContent = "✨ Mengacak simbol...";
+
   let ticks = 0;
 
   const timer = setInterval(() => {
@@ -717,6 +972,7 @@ function spin() {
 
       result.forEach((symbol, i) => {
         const reel = $("r" + (i + 1));
+
         reel.textContent = symbol;
         reel.classList.remove("spinning");
         reel.classList.add("neon-stop");
@@ -739,41 +995,72 @@ function showBigWin() {
 
   const overlay = document.createElement("div");
   overlay.className = "bigwin-overlay";
-  overlay.innerHTML =
-    '<div class="bigwin-card">' +
-      '<div class="bigwin-title">👑 BIG WIN! 👑</div>' +
-      '<div class="bigwin-subtitle">' +
-        'JACKPOT DEMO<br>+100 POIN VIRTUAL<br>' +
-        '<small>Ketuk untuk menutup</small>' +
-      '</div>' +
-    '</div>';
 
+  const card = document.createElement("div");
+  card.className = "bigwin-card";
+
+  const title = document.createElement("div");
+  title.className = "bigwin-title";
+  title.textContent = "👑 BIG WIN! 👑";
+
+  const subtitle = document.createElement("div");
+  subtitle.className = "bigwin-subtitle";
+  subtitle.append(
+    document.createTextNode("JACKPOT DEMO"),
+    document.createElement("br"),
+    document.createTextNode("+100 POIN VIRTUAL"),
+    document.createElement("br")
+  );
+
+  const small = document.createElement("small");
+  small.textContent = "Ketuk untuk menutup";
+  subtitle.appendChild(small);
+
+  card.append(title, subtitle);
+  overlay.appendChild(card);
   document.body.appendChild(overlay);
+
   overlay.addEventListener("click", () => overlay.remove());
   setTimeout(() => overlay.remove(), 2200);
 }
 
 function finish(result) {
   let message = "Belum cocok. Coba lagi!";
+  let pointsWon = 0;
+
   const unique = new Set(result).size;
 
   if (unique === 1) {
-    credits += 100;
+    pointsWon = 100;
+    credits += pointsWon;
     matches++;
     message = "👑 JACKPOT DEMO! +100 poin";
     showBigWin();
   } else if (unique === 2) {
-    credits += 20;
+    pointsWon = 20;
+    credits += pointsWon;
     matches++;
     message = "✨ Simbol cocok! +20 poin";
   }
 
   credits = Math.min(credits, 999999999);
+
+  addHistory(
+    result,
+    unique === 1
+      ? "JACKPOT DEMO"
+      : unique === 2
+        ? "Simbol cocok"
+        : "Belum cocok",
+    pointsWon
+  );
+
   update();
 
-  if (unique === 1 || unique === 2) animateBalance();
+  if (pointsWon > 0) animateBalance();
 
   $("result").textContent = message;
+
   showSparkles();
   playTone(780, 0.2);
 
@@ -795,8 +1082,11 @@ function resetGame() {
 
   $("result").textContent = "Kredit demo sudah direset!";
   update();
+
+  // Riwayat sengaja tidak dihapus saat kredit direset.
 }
 
+/* SUARA */
 let audioContext;
 let soundEnabled = true;
 
@@ -804,14 +1094,19 @@ function playTone(frequency = 440, duration = 0.12) {
   if (!soundEnabled) return;
 
   try {
-    audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
+    audioContext ??= new (
+      window.AudioContext || window.webkitAudioContext
+    )();
 
-    if (audioContext.state === "suspended") audioContext.resume();
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
 
     const oscillator = audioContext.createOscillator();
     const gain = audioContext.createGain();
 
     oscillator.frequency.value = frequency;
+
     gain.gain.setValueAtTime(0.08, audioContext.currentTime);
     gain.gain.exponentialRampToValueAtTime(
       0.001,
@@ -820,6 +1115,7 @@ function playTone(frequency = 440, duration = 0.12) {
 
     oscillator.connect(gain);
     gain.connect(audioContext.destination);
+
     oscillator.start();
     oscillator.stop(audioContext.currentTime + duration);
   } catch (error) {
@@ -837,6 +1133,7 @@ function toggleSound() {
   if (!soundEnabled) stopMusic();
 }
 
+/* MUSIK LATAR */
 let musicPlaying = false;
 let musicTimer = null;
 let musicStep = 0;
@@ -844,7 +1141,11 @@ let musicStep = 0;
 function playMusicNote() {
   if (!soundEnabled || !musicPlaying || !audioContext) return;
 
-  const notes = [261.63, 329.63, 392, 329.63, 293.66, 349.23, 440, 349.23];
+  const notes = [
+    261.63, 329.63, 392, 329.63,
+    293.66, 349.23, 440, 349.23
+  ];
+
   const osc = audioContext.createOscillator();
   const gain = audioContext.createGain();
 
@@ -852,22 +1153,30 @@ function playMusicNote() {
   osc.frequency.value = notes[musicStep % notes.length];
 
   const now = audioContext.currentTime;
+
   gain.gain.setValueAtTime(0.0001, now);
   gain.gain.linearRampToValueAtTime(0.025, now + 0.04);
   gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
 
   osc.connect(gain);
   gain.connect(audioContext.destination);
+
   osc.start(now);
   osc.stop(now + 0.3);
+
   musicStep++;
 }
 
 function startMusic() {
   try {
-    audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
+    audioContext ??= new (
+      window.AudioContext || window.webkitAudioContext
+    )();
 
-    if (audioContext.state === "suspended") audioContext.resume();
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
     if (musicPlaying) return;
 
     if (!soundEnabled) {
@@ -877,16 +1186,20 @@ function startMusic() {
 
     musicPlaying = true;
     playMusicNote();
+
     musicTimer = setInterval(playMusicNote, 350);
   } catch (error) {
-    $("result").textContent = "Audio tidak tersedia di browser ini.";
+    $("result").textContent =
+      "Audio tidak tersedia di browser ini.";
   }
 }
 
 function stopMusic() {
   musicPlaying = false;
+
   if (musicTimer) clearInterval(musicTimer);
   musicTimer = null;
+
   $("musicButton").textContent = "🎵 MUSIK: OFF";
 }
 
@@ -902,6 +1215,7 @@ function toggleMusic() {
   }
 }
 
+/* EFEK BINTANG */
 function showSparkles() {
   const layer = $("sparkleLayer");
   if (!layer) return;
@@ -910,22 +1224,35 @@ function showSparkles() {
 
   for (let i = 0; i < 14; i++) {
     const star = document.createElement("span");
+
     star.className = "sparkle-star";
     star.textContent = Math.random() > 0.5 ? "✦" : "✧";
     star.style.left = (8 + Math.random() * 84) + "%";
     star.style.top = (20 + Math.random() * 65) + "%";
-    star.style.setProperty("--dx", (Math.random() * 100 - 50) + "px");
-    star.style.animationDelay = (Math.random() * 0.2) + "s";
+
+    star.style.setProperty(
+      "--dx",
+      (Math.random() * 100 - 50) + "px"
+    );
+
+    star.style.animationDelay =
+      (Math.random() * 0.2) + "s";
+
     layer.appendChild(star);
   }
 
   setTimeout(() => layer.replaceChildren(), 1600);
 }
 
-/* Mulai halaman */
+/* MULAI HALAMAN */
 loadProfile();
+loadHistory();
 update();
 
+$("saveProfile").addEventListener("click", saveProfile);
+$("clearHistory").addEventListener("click", clearHistory);
+
+/* LOADING SCREEN */
 (function () {
   const loader = $("loading-screen");
   if (!loader) return;
@@ -937,4 +1264,4 @@ update();
 })();
 </script>
 </body>
-      </html>
+</html>
