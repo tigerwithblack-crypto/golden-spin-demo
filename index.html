@@ -614,33 +614,37 @@ function loadProfile() {
   }
 }
 
+
 function saveProfile() {
-  const name = cleanProfileName($("profileName").value);
+  const input = document.getElementById("profileName");
+  const display = document.getElementById("profileDisplayName");
+  const message = document.getElementById("profileMessage");
+
+  const name = input.value.trim().replace(/\s+/g, " ").slice(0, 20);
 
   if (!name) {
-    $("profileMessage").textContent =
-      "Masukkan nama panggilan terlebih dahulu.";
+    message.textContent = "Masukkan nama panggilan dulu!";
     return;
   }
 
-  $("profileName").value = name;
-  $("profileDisplayName").textContent = name;
+  input.value = name;
+  display.textContent = name;
 
   try {
-    localStorage.setItem(PROFILE_KEY, name);
-    $("profileMessage").textContent =
-      "✅ Profil tersimpan di browser perangkat ini.";
+    localStorage.setItem("goldenSpinDemoProfileName", name);
+
+    const saved = localStorage.getItem("goldenSpinDemoProfileName");
+
+    if (saved === name) {
+      message.textContent = "✅ Nama berhasil disimpan!";
+    } else {
+      message.textContent = "Nama tampil, tetapi belum tersimpan permanen.";
+    }
   } catch (error) {
-    $("profileMessage").textContent =
-      "Profil dipakai sementara, tetapi browser tidak bisa menyimpannya.";
+    message.textContent =
+      "Penyimpanan browser gagal. Coba izinkan penyimpanan situs.";
   }
 }
-
-$("saveProfile").addEventListener("click", saveProfile);
-
-$("profileName").addEventListener("keydown", event => {
-  if (event.key === "Enter") saveProfile();
-});
 
 /* Level demo berdasarkan total putaran sesi saat ini */
 function updateProfile() {
