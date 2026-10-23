@@ -29,7 +29,6 @@ body {
 }
 
 .container { max-width: 440px; margin: auto; }
-
 header { text-align: center; padding: 18px 0 22px; }
 
 .logo-image {
@@ -77,6 +76,117 @@ header { text-align: center; padding: 18px 0 22px; }
   animation: shineSweep 5s ease-in-out infinite;
 }
 
+.profile {
+  position: relative;
+  z-index: 1;
+  padding: 16px;
+  margin-bottom: 22px;
+  border: 1px solid #9a67ff66;
+  border-radius: 17px;
+  background: #120c1caa;
+}
+
+.profile-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.avatar {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #553477, #21132f);
+  font-size: 27px;
+  box-shadow: 0 0 14px #f7d57833;
+}
+
+.profile-title {
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.profile-level {
+  color: #c9b9df;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.profile-label {
+  display: block;
+  color: #d6c5f4;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.profile-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #8e68be;
+  border-radius: 10px;
+  outline: none;
+  background: #10091c;
+  color: white;
+  font: inherit;
+}
+
+.profile-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 10px #f7d57833;
+}
+
+.profile-save {
+  margin-top: 9px;
+  color: #271631;
+  background: linear-gradient(100deg, #e5b84d, #fff0ad, #d6a43b);
+}
+
+.profile-message {
+  min-height: 18px;
+  margin-top: 7px;
+  color: #d5bdfc;
+  font-size: 11px;
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.profile-stat {
+  min-width: 0;
+  padding: 10px 4px;
+  text-align: center;
+  border: 1px solid #ffffff14;
+  border-radius: 10px;
+  background: #ffffff08;
+}
+
+.profile-stat small {
+  display: block;
+  color: #c9b9df;
+  font-size: 10px;
+}
+
+.profile-stat strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--gold);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
 .label {
   text-align: center;
   color: #d6c5f4;
@@ -92,9 +202,7 @@ header { text-align: center; padding: 18px 0 22px; }
   color: var(--gold);
 }
 
-.balance.balance-up {
-  animation: balanceUp 0.65s ease;
-}
+.balance.balance-up { animation: balanceUp .65s ease; }
 
 .reels {
   position: relative;
@@ -142,7 +250,7 @@ header { text-align: center; padding: 18px 0 22px; }
 
 button {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   border: 0;
   border-radius: 13px;
@@ -260,7 +368,6 @@ footer {
   margin-top: 10px;
 }
 
-/* Loading screen */
 #loading-screen {
   position: fixed;
   inset: 0;
@@ -309,48 +416,37 @@ footer {
   from { text-shadow: 0 0 8px #f7d57855; }
   to { text-shadow: 0 0 12px #f7d578, 0 0 28px #f7d578aa, 0 0 45px #9a67ff66; }
 }
-
 @keyframes shineSweep {
   0%, 65% { left: -150%; }
   100% { left: 180%; }
 }
-
 @keyframes buttonGlow {
   from { box-shadow: 0 5px 0 #89602a, 0 0 8px #e8b84b22; }
   to { box-shadow: 0 5px 0 #89602a, 0 0 22px #f7d57899; }
 }
-
 @keyframes pulse {
   from { transform: translateY(-2px); }
   to { transform: translateY(2px); }
 }
-
 @keyframes sparkleFly {
   0% { opacity: 0; transform: translate(0, 12px) scale(.3) rotate(0); }
   20% { opacity: 1; }
   100% { opacity: 0; transform: translate(var(--dx), -65px) scale(1.4) rotate(150deg); }
 }
-
 @keyframes winPop {
   0% { transform: scale(.3); }
   75% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
-
 @keyframes winFade {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
-@keyframes loadingSpin {
-  to { transform: rotate(360deg); }
-}
-
+@keyframes loadingSpin { to { transform: rotate(360deg); } }
 @keyframes loadingGlow {
   from { opacity: .7; }
   to { opacity: 1; text-shadow: 0 0 28px #f7d578; }
 }
-
 @keyframes balanceUp {
   0% { transform: scale(1); text-shadow: 0 0 0 transparent; }
   45% {
@@ -359,6 +455,13 @@ footer {
     text-shadow: 0 0 12px #f7d578, 0 0 28px #f7d578;
   }
   100% { transform: scale(1); color: var(--gold); text-shadow: 0 0 0 transparent; }
+}
+
+@media (max-width: 360px) {
+  .profile { padding: 12px; }
+  .profile-stat strong { font-size: 13px; }
+  .reel { height: 76px; font-size: 40px; }
+  .balance { font-size: 27px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -380,58 +483,102 @@ footer {
 <img src="./logo.png" alt="GOLDEN SPIN DEMO" class="logo-image">
 
 <main class="container">
-  <header>
-    <div class="logo-text">✦ GOLDEN SPIN ✦</div>
-    <div class="subtitle">PREMIUM ARCADE DEMO</div>
-  </header>
+<header>
+  <div class="logo-text">✦ GOLDEN SPIN ✦</div>
+  <div class="subtitle">PREMIUM ARCADE DEMO</div>
+</header>
 
-  <section class="card">
-    <div class="label">SALDO KREDIT VIRTUAL</div>
-    <div class="balance" id="balance">1.000 PTS</div>
-    <div class="sparkle-layer" id="sparkleLayer"></div>
+<section class="card">
 
-    <div class="reels" aria-label="Simbol permainan">
-      <div class="reel" id="r1">🍒</div>
-      <div class="reel" id="r2">⭐</div>
-      <div class="reel" id="r3">🍇</div>
+  <!-- PROFIL PEMAIN DEMO -->
+  <section class="profile">
+    <div class="profile-heading">
+      <div class="avatar">👤</div>
+      <div>
+        <div class="profile-title" id="profileDisplayName">Pemain Demo</div>
+        <div class="profile-level" id="profileLevel">🏅 Pemain Pemula</div>
+      </div>
     </div>
 
-    <div class="result" id="result" aria-live="polite">
-      Selamat datang! Mainkan demo gratis.
+    <label class="profile-label" for="profileName">
+      Nama panggilan
+    </label>
+    <input
+      class="profile-input"
+      id="profileName"
+      type="text"
+      maxlength="20"
+      placeholder="Tulis nama panggilan"
+      autocomplete="off"
+      spellcheck="false"
+    >
+
+    <button class="profile-save" id="saveProfile" type="button">
+      💾 SIMPAN PROFIL
+    </button>
+    <div class="profile-message" id="profileMessage" aria-live="polite">
+      Nama disimpan di browser perangkat ini.
     </div>
 
-    <button class="spin" id="spin" type="button" onclick="spin()">
-      ✨ PUTAR DEMO ✨
-    </button>
-
-    <button class="secondary" type="button" onclick="resetGame()">
-      ↻ RESET KREDIT
-    </button>
-
-    <button class="secondary" id="soundButton" type="button" onclick="toggleSound()">
-      🔊 SUARA: ON
-    </button>
-
-    <button class="secondary" id="musicButton" type="button" onclick="toggleMusic()">
-      🎵 MUSIK: OFF
-    </button>
-
-    <div class="info">
-      <div><small>Total putaran</small><strong id="rounds">0</strong></div>
-      <div><small>Simbol cocok</small><strong id="matches">0</strong></div>
-    </div>
-
-    <div class="rules">
-      Cocokkan simbol untuk mendapatkan poin virtual.<br>
-      Tiga simbol sama: +100 poin.<br>
-      Dua simbol sama: +20 poin.
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <small>Putaran</small>
+        <strong id="profileRounds">0</strong>
+      </div>
+      <div class="profile-stat">
+        <small>Cocok</small>
+        <strong id="profileMatches">0</strong>
+      </div>
+      <div class="profile-stat">
+        <small>Kredit</small>
+        <strong id="profileCredits">1.000</strong>
+      </div>
     </div>
   </section>
 
-  <footer>
-    GOLDEN SPIN DEMO · HANYA UNTUK HIBURAN<br>
-    Kredit virtual tidak memiliki nilai uang dan tidak dapat diuangkan.
-  </footer>
+  <div class="label">SALDO KREDIT VIRTUAL</div>
+  <div class="balance" id="balance">1.000 PTS</div>
+  <div class="sparkle-layer" id="sparkleLayer"></div>
+
+  <div class="reels" aria-label="Simbol permainan">
+    <div class="reel" id="r1">🍒</div>
+    <div class="reel" id="r2">⭐</div>
+    <div class="reel" id="r3">🍇</div>
+  </div>
+
+  <div class="result" id="result" aria-live="polite">
+    Selamat datang! Mainkan demo gratis.
+  </div>
+
+  <button class="spin" id="spin" type="button" onclick="spin()">
+    ✨ PUTAR DEMO ✨
+  </button>
+  <button class="secondary" type="button" onclick="resetGame()">
+    ↻ RESET KREDIT
+  </button>
+  <button class="secondary" id="soundButton" type="button" onclick="toggleSound()">
+    🔊 SUARA: ON
+  </button>
+  <button class="secondary" id="musicButton" type="button" onclick="toggleMusic()">
+    🎵 MUSIK: OFF
+  </button>
+
+  <div class="info">
+    <div><small>Total putaran</small><strong id="rounds">0</strong></div>
+    <div><small>Simbol cocok</small><strong id="matches">0</strong></div>
+  </div>
+
+  <div class="rules">
+    Cocokkan simbol untuk mendapatkan poin virtual.<br>
+    Tiga simbol sama: +100 poin.<br>
+    Dua simbol sama: +20 poin.
+  </div>
+</section>
+
+<footer>
+  GOLDEN SPIN DEMO · HANYA UNTUK HIBURAN<br>
+  Kredit virtual tidak memiliki nilai uang dan tidak dapat diuangkan.
+</footer>
 </main>
 
 <script>
@@ -445,13 +592,82 @@ let busy = false;
 
 const $ = id => document.getElementById(id);
 
+/* PROFIL: hanya menyimpan nama panggilan di browser */
+const PROFILE_KEY = "goldenSpinDemoProfileName";
+const DEFAULT_PROFILE_NAME = "Pemain Demo";
+
+function cleanProfileName(value) {
+  return value.trim().replace(/\s+/g, " ").slice(0, 20);
+}
+
+function loadProfile() {
+  try {
+    const savedName = localStorage.getItem(PROFILE_KEY);
+    const name = cleanProfileName(savedName || DEFAULT_PROFILE_NAME);
+    $("profileName").value = name;
+    $("profileDisplayName").textContent = name || DEFAULT_PROFILE_NAME;
+  } catch (error) {
+    $("profileName").value = DEFAULT_PROFILE_NAME;
+    $("profileDisplayName").textContent = DEFAULT_PROFILE_NAME;
+    $("profileMessage").textContent =
+      "Penyimpanan browser tidak tersedia. Nama bisa dipakai sementara.";
+  }
+}
+
+function saveProfile() {
+  const name = cleanProfileName($("profileName").value);
+
+  if (!name) {
+    $("profileMessage").textContent =
+      "Masukkan nama panggilan terlebih dahulu.";
+    return;
+  }
+
+  $("profileName").value = name;
+  $("profileDisplayName").textContent = name;
+
+  try {
+    localStorage.setItem(PROFILE_KEY, name);
+    $("profileMessage").textContent =
+      "✅ Profil tersimpan di browser perangkat ini.";
+  } catch (error) {
+    $("profileMessage").textContent =
+      "Profil dipakai sementara, tetapi browser tidak bisa menyimpannya.";
+  }
+}
+
+$("saveProfile").addEventListener("click", saveProfile);
+
+$("profileName").addEventListener("keydown", event => {
+  if (event.key === "Enter") saveProfile();
+});
+
+/* Level demo berdasarkan total putaran sesi saat ini */
+function updateProfile() {
+  $("profileRounds").textContent = rounds;
+  $("profileMatches").textContent = matches;
+  $("profileCredits").textContent = credits.toLocaleString("id-ID");
+
+  let level = "🏅 Pemain Pemula";
+
+  if (rounds >= 50) {
+    level = "💎 Pemain Legenda";
+  } else if (rounds >= 20) {
+    level = "👑 Pemain Pro";
+  } else if (rounds >= 10) {
+    level = "⭐ Pemain Mahir";
+  }
+
+  $("profileLevel").textContent = level;
+}
+
 function update() {
   $("balance").textContent = credits.toLocaleString("id-ID") + " PTS";
   $("rounds").textContent = rounds;
   $("matches").textContent = matches;
+  updateProfile();
 }
 
-/* Animasi saldo saat mendapat poin */
 function animateBalance() {
   const el = $("balance");
   if (!el) return;
@@ -460,9 +676,7 @@ function animateBalance() {
   void el.offsetWidth;
   el.classList.add("balance-up");
 
-  setTimeout(() => {
-    el.classList.remove("balance-up");
-  }, 700);
+  setTimeout(() => el.classList.remove("balance-up"), 700);
 }
 
 function randomSymbol() {
@@ -553,9 +767,7 @@ function finish(result) {
   credits = Math.min(credits, 999999999);
   update();
 
-  if (unique === 1 || unique === 2) {
-    animateBalance();
-  }
+  if (unique === 1 || unique === 2) animateBalance();
 
   $("result").textContent = message;
   showSparkles();
@@ -590,9 +802,7 @@ function playTone(frequency = 440, duration = 0.12) {
   try {
     audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
 
-    if (audioContext.state === "suspended") {
-      audioContext.resume();
-    }
+    if (audioContext.state === "suspended") audioContext.resume();
 
     const oscillator = audioContext.createOscillator();
     const gain = audioContext.createGain();
@@ -653,10 +863,7 @@ function startMusic() {
   try {
     audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
 
-    if (audioContext.state === "suspended") {
-      audioContext.resume();
-    }
-
+    if (audioContext.state === "suspended") audioContext.resume();
     if (musicPlaying) return;
 
     if (!soundEnabled) {
@@ -674,10 +881,8 @@ function startMusic() {
 
 function stopMusic() {
   musicPlaying = false;
-
   if (musicTimer) clearInterval(musicTimer);
   musicTimer = null;
-
   $("musicButton").textContent = "🎵 MUSIK: OFF";
 }
 
@@ -713,21 +918,19 @@ function showSparkles() {
   setTimeout(() => layer.replaceChildren(), 1600);
 }
 
+/* Mulai halaman */
+loadProfile();
 update();
 
-/* Hilangkan loading screen setelah halaman siap */
 (function () {
   const loader = $("loading-screen");
   if (!loader) return;
 
   setTimeout(() => {
     loader.classList.add("hidden");
-
-    setTimeout(() => {
-      loader.remove();
-    }, 600);
+    setTimeout(() => loader.remove(), 600);
   }, 1000);
 })();
 </script>
 </body>
-</html>
+      </html>
