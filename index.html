@@ -716,7 +716,7 @@ footer {
 
 const symbols = ["🀄", "🃏", "🎴", "💠", "⚜️", "🪙"];
 
-let credits = 1000;
+let credits = 10000;
 let rounds = 0;
 let matches = 0;
 let busy = false;
@@ -1008,7 +1008,7 @@ function showBigWin() {
   subtitle.append(
     document.createTextNode("JACKPOT DEMO"),
     document.createElement("br"),
-    document.createTextNode("+100 POIN VIRTUAL"),
+    document.createTextNode("+500 POIN VIRTUAL"),
     document.createElement("br")
   );
 
@@ -1034,13 +1034,13 @@ function finish(result) {
     pointsWon = 100;
     credits += pointsWon;
     matches++;
-    message = "👑 JACKPOT DEMO! +100 poin";
+    message = "👑 JACKPOT DEMO! +500 poin";
     showBigWin();
   } else if (unique === 2) {
     pointsWon = 20;
     credits += pointsWon;
     matches++;
-    message = "✨ Simbol cocok! +20 poin";
+    message = "✨ Simbol cocok! +50 poin";
   }
 
   credits = Math.min(credits, 999999999);
@@ -1071,7 +1071,7 @@ function finish(result) {
 function resetGame() {
   if (busy) return;
 
-  credits = 1000;
+  credits = 10000;
   rounds = 0;
   matches = 0;
 
