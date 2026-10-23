@@ -302,18 +302,20 @@ function showSparkles() {
 }
 update();
 </script>
-  <script>
-window.addEventListener("load", function () {
+<script>
+(function () {
   const loader = document.getElementById("loading-screen");
 
-  if (loader) {
+  if (!loader) return;
+
+  setTimeout(function () {
     loader.classList.add("hidden");
 
     setTimeout(function () {
       loader.remove();
     }, 600);
-  }
-});
-  </script>
+  }, 1000);
+})();
+</script>
 </body>
 </html>
