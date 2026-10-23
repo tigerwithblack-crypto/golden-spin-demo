@@ -55,6 +55,66 @@ footer{text-align:center;color:#87759d;font-size:11px;margin:22px 0 8px}
   height: auto;
   margin: 20px auto;
   }
+  /* GOLDEN SPIN DEMO LOADING */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: radial-gradient(
+    circle at center,
+    #382052,
+    #10091c 75%
+  );
+  transition: opacity 0.5s ease;
+}
+
+#loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-logo {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #f7d578;
+  text-shadow: 0 0 18px #f7d57899;
+  animation: loadingGlow 1.2s ease-in-out infinite alternate;
+}
+
+.loading-ring {
+  width: 54px;
+  height: 54px;
+  border: 4px solid #ffffff22;
+  border-top-color: #f7d578;
+  border-right-color: #9a67ff;
+  border-radius: 50%;
+  animation: loadingSpin 0.8s linear infinite;
+}
+
+.loading-text {
+  color: #d5bdfc;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+@keyframes loadingSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loadingGlow {
+  from { opacity: 0.7; }
+  to {
+    opacity: 1;
+    text-shadow: 0 0 28px #f7d578;
+  }
+}
 </style>
 </head>
 <body>
